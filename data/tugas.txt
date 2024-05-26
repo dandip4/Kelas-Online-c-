@@ -1,0 +1,5 @@
+1,Narkotika,gg,gagaaga,2024-02-23,Raihan
+1,Bisnis,judul,jdask,jsdkjfa,Fikri
+2,Bisnis,f,f,f,Fikri
+1,Narkotika,jdjdj,djdjdjd,jdjddjd,Raihan
+Bisnis,1,Babaji,Bikin makalah,2024-06-01

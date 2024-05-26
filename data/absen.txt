@@ -1,0 +1,2 @@
+1,Bisnis,2024-05-25,Fikri
+Bisnis,1,2024-06-01,Fikri

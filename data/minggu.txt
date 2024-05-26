@@ -1,0 +1,15 @@
+Agama,1
+Agama,2
+Agama,3
+Agama,5
+Agama,6
+Agama,7
+Bisnis,1
+Bisnis,2
+Bisnis,3
+Bisnis,4
+Narkotika,1
+Narkotika,2
+Narkotika,3
+Narkotika,4
+Orkom,1
