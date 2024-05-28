@@ -150,7 +150,7 @@ void mahasiswaMenu()
     cout << "\n";
     if (!mahasiswa.auth(username, password))
     {
-        cout << "Login failed!\n";
+        cout << "Login gagal!\n";
         return;
     }
 
@@ -162,7 +162,7 @@ void mahasiswaMenu()
         cout << "\n";
         cout << mataKuliah << " Minggu ke: " << minggu << "\n";
         cout << "1. Lihat Tugas dan Absen\n2. Lihat Materi\n3. Kumpul Tugas\n4. Absen\n5. Pilih Minggu\n6. Pilih Matakuliah\n7. Logout\n";
-        cout << "Choose an option: ";
+        cout << "pilih opsi: ";
         cin >> choice;
         cout << "\n";
         switch (choice)
@@ -188,7 +188,7 @@ void mahasiswaMenu()
         case 7:
             return;
         default:
-            cout << "Invalid choice, please try again\n";
+            cout << "pilihan gagal\n";
         }
     }
 }
