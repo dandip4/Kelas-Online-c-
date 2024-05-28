@@ -1,4 +1,3 @@
-Raihan,123,Narkotika
-Fikri,123,Bisnis
-Zidan,123,Orkom
-agus,123,Agama
+Asep,111,Matematika
+Dinar,112,Algoritma
+Endang,113,Komputer

@@ -22,7 +22,7 @@ struct Mahasiswa
             vector<string> tokens = split(line, ',');
             if (tokens[0] == username && tokens[1] == password)
             {
-                currentMahasiswa = tokens[0];
+                mahasiswa = tokens[0];
                 return true;
             }
         }
@@ -77,8 +77,6 @@ struct Mahasiswa
         namaDosen = mataKuliahList[choice - 1].first;
         mataKuliah = mataKuliahList[choice - 1].second;
         cout << "Mata kuliah " << mataKuliah << " dipilih.\n";
-
-        pilihMinggu(); 
     }
 
     void pilihMinggu()
@@ -86,7 +84,7 @@ struct Mahasiswa
         vector<string> mingguList = getMingguList();
         if (mingguList.empty())
         {
-            cout << "Belum ada minggu yang dibuat. Silakan buat minggu terlebih dahulu.\n";
+            cout << "Belum ada minggu yang dibuat.\n";
             return;
         }
 

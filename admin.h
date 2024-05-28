@@ -11,75 +11,93 @@
 
 using namespace std;
 
-struct Admin {
-    bool authenticate(const string& username, const string& password) {
+struct Admin
+{
+    bool authenticate(const string &username, const string &password)
+    {
         ifstream file("data/admin.txt");
         string line;
-        while (getline(file, line)) {
+        while (getline(file, line))
+        {
             vector<string> tokens = split(line, ',');
-            if (tokens[0] == username && tokens[1] == password) {
+            if (tokens[0] == username && tokens[1] == password)
+            {
                 return true;
             }
         }
         return false;
     }
 
-    void crudMahasiswa() {
+    void crudMahasiswa()
+    {
         int choice;
-        while (true) {
+        while (true)
+        {        cout << "\n";
+
+            cout << "CRUD Mahasiswa\n";
             cout << "1. Tambah Mahasiswa\n2. Lihat Mahasiswa\n3. Update Mahasiswa\n4. Hapus Mahasiswa\n5. Kembali\n";
             cout << "Choose an option: ";
             cin >> choice;
-            switch (choice) {
-                case 1:
-                    tambahMahasiswa();
-                    break;
-                case 2:
-                    lihatMahasiswa();
-                    break;
-                case 3:
-                    updateMahasiswa();
-                    break;
-                case 4:
-                    hapusMahasiswa();
-                    break;
-                case 5:
-                    return;
-                default:
-                    cout << "Invalid choice, please try again.\n";
+            cout << "\n";
+            switch (choice)
+            {
+            case 1:
+                tambahMahasiswa();
+                break;
+            case 2:
+                lihatMahasiswa();
+                break;
+            case 3:
+                updateMahasiswa();
+                break;
+            case 4:
+                hapusMahasiswa();
+                break;
+            case 5:
+                return;
+            default:
+                cout << "Invalid choice, please try again.\n";
             }
         }
     }
 
-    void crudDosen() {
+    void crudDosen()
+    {
         int choice;
-        while (true) {
+        while (true)
+        {
+            cout << "\n";
+            cout << "CRUD Dosen\n";
             cout << "1. Tambah Dosen\n2. Lihat Dosen\n3. Update Dosen\n4. Hapus Dosen\n5. Kembali\n";
             cout << "Choose an option: ";
             cin >> choice;
-            switch (choice) {
-                case 1:
-                    tambahDosen();
-                    break;
-                case 2:
-                    lihatDosen();
-                    break;
-                case 3:
-                    updateDosen();
-                    break;
-                case 4:
-                    hapusDosen();
-                    break;
-                case 5:
-                    return;
-                default:
-                    cout << "Invalid choice, please try again.\n";
+            cout << "\n";
+
+            switch (choice)
+            {
+            case 1:
+                tambahDosen();
+                break;
+            case 2:
+                lihatDosen();
+                break;
+            case 3:
+                updateDosen();
+                break;
+            case 4:
+                hapusDosen();
+                break;
+            case 5:
+                return;
+            default:
+                cout << "Invalid choice, please try again.\n";
             }
         }
     }
 
 private:
-    void tambahMahasiswa() {
+    void tambahMahasiswa()
+    {
         ofstream file("data/mahasiswa.txt", ios::app);
         string nama, npm;
         cout << "Nama: ";
@@ -90,16 +108,19 @@ private:
         cout << "Mahasiswa berhasil ditambahkan.\n";
     }
 
-    void lihatMahasiswa() {
+    void lihatMahasiswa()
+    {
         ifstream file("data/mahasiswa.txt");
         string line;
-        while (getline(file, line)) {
+        while (getline(file, line))
+        {
             vector<string> tokens = split(line, ',');
             cout << "Nama: " << tokens[0] << ", NPM: " << tokens[1] << "\n";
         }
     }
 
-    void updateMahasiswa() {
+    void updateMahasiswa()
+    {
         string nama, npm;
         cout << "Masukkan NPM Mahasiswa yang ingin diupdate: ";
         cin >> npm;
@@ -107,14 +128,18 @@ private:
         ofstream temp("data/temp.txt");
         string line;
         bool found = false;
-        while (getline(file, line)) {
+        while (getline(file, line))
+        {
             vector<string> tokens = split(line, ',');
-            if (tokens[1] == npm) {
+            if (tokens[1] == npm)
+            {
                 found = true;
                 cout << "Nama Baru: ";
                 cin >> nama;
                 temp << nama << "," << npm << "\n";
-            } else {
+            }
+            else
+            {
                 temp << line << "\n";
             }
         }
@@ -122,14 +147,18 @@ private:
         temp.close();
         remove("data/mahasiswa.txt");
         rename("data/temp.txt", "data/mahasiswa.txt");
-        if (found) {
+        if (found)
+        {
             cout << "Mahasiswa berhasil diupdate.\n";
-        } else {
+        }
+        else
+        {
             cout << "Mahasiswa tidak ditemukan.\n";
         }
     }
 
-    void hapusMahasiswa() {
+    void hapusMahasiswa()
+    {
         string npm;
         cout << "Masukkan NPM Mahasiswa yang ingin dihapus: ";
         cin >> npm;
@@ -137,11 +166,15 @@ private:
         ofstream temp("data/temp.txt");
         string line;
         bool found = false;
-        while (getline(file, line)) {
+        while (getline(file, line))
+        {
             vector<string> tokens = split(line, ',');
-            if (tokens[1] == npm) {
+            if (tokens[1] == npm)
+            {
                 found = true;
-            } else {
+            }
+            else
+            {
                 temp << line << "\n";
             }
         }
@@ -149,14 +182,18 @@ private:
         temp.close();
         remove("data/mahasiswa.txt");
         rename("data/temp.txt", "data/mahasiswa.txt");
-        if (found) {
+        if (found)
+        {
             cout << "Mahasiswa berhasil dihapus.\n";
-        } else {
+        }
+        else
+        {
             cout << "Mahasiswa tidak ditemukan.\n";
         }
     }
 
-    void tambahDosen() {
+    void tambahDosen()
+    {
         ofstream file("data/dosen.txt", ios::app);
         string nama, nidn, mataKuliah;
         cout << "Nama: ";
@@ -169,16 +206,19 @@ private:
         cout << "Dosen berhasil ditambahkan.\n";
     }
 
-    void lihatDosen() {
+    void lihatDosen()
+    {
         ifstream file("data/dosen.txt");
         string line;
-        while (getline(file, line)) {
+        while (getline(file, line))
+        {
             vector<string> tokens = split(line, ',');
             cout << "Nama: " << tokens[0] << ", NIDN: " << tokens[1] << ", Mata Kuliah: " << tokens[2] << "\n";
         }
     }
 
-    void updateDosen() {
+    void updateDosen()
+    {
         string nama, nidn, mataKuliah;
         cout << "Masukkan NIDN Dosen yang ingin diupdate: ";
         cin >> nidn;
@@ -186,16 +226,20 @@ private:
         ofstream temp("data/temp.txt");
         string line;
         bool found = false;
-        while (getline(file, line)) {
+        while (getline(file, line))
+        {
             vector<string> tokens = split(line, ',');
-            if (tokens[1] == nidn) {
+            if (tokens[1] == nidn)
+            {
                 found = true;
                 cout << "Nama Baru: ";
                 cin >> nama;
                 cout << "Mata Kuliah Baru: ";
                 cin >> mataKuliah;
                 temp << nama << "," << nidn << "," << mataKuliah << "\n";
-            } else {
+            }
+            else
+            {
                 temp << line << "\n";
             }
         }
@@ -203,14 +247,18 @@ private:
         temp.close();
         remove("data/dosen.txt");
         rename("data/temp.txt", "data/dosen.txt");
-        if (found) {
+        if (found)
+        {
             cout << "Dosen berhasil diupdate.\n";
-        } else {
+        }
+        else
+        {
             cout << "Dosen tidak ditemukan.\n";
         }
     }
 
-    void hapusDosen() {
+    void hapusDosen()
+    {
         string nidn;
         cout << "Masukkan NIDN Dosen yang ingin dihapus: ";
         cin >> nidn;
@@ -218,11 +266,15 @@ private:
         ofstream temp("data/temp.txt");
         string line;
         bool found = false;
-        while (getline(file, line)) {
+        while (getline(file, line))
+        {
             vector<string> tokens = split(line, ',');
-            if (tokens[1] == nidn) {
+            if (tokens[1] == nidn)
+            {
                 found = true;
-            } else {
+            }
+            else
+            {
                 temp << line << "\n";
             }
         }
@@ -230,9 +282,12 @@ private:
         temp.close();
         remove("data/dosen.txt");
         rename("data/temp.txt", "data/dosen.txt");
-        if (found) {
+        if (found)
+        {
             cout << "Dosen berhasil dihapus.\n";
-        } else {
+        }
+        else
+        {
             cout << "Dosen tidak ditemukan.\n";
         }
     }

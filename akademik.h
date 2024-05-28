@@ -7,11 +7,12 @@
 #include <string>
 #include <utility> 
 #include <ctime> 
+#include <filesystem> 
 #include "utils.h"
 
 using namespace std;
 
-    string currentMahasiswa;
+    string mahasiswa;
     string mataKuliah;
     string namaDosen;
     string minggu;
@@ -24,7 +25,7 @@ using namespace std;
         return string(buffer);
     }
 
-    bool isAfterDeadlineabsen(const string& currentDate) {
+    bool deadlineAbsen(const string& currentDate) {
             ifstream file("data/absen.txt");
             string line;
             while (getline(file, line)) {
@@ -38,7 +39,7 @@ using namespace std;
             }
             return false;
     }
-    bool isAfterDeadlinetugas(const string& currentDate) {
+    bool deadlineTugas(const string& currentDate) {
             ifstream file("data/tugas.txt");
             string line;
             while (getline(file, line)) {
@@ -53,29 +54,56 @@ using namespace std;
             return false;
     }
     bool sudahAbsen() {
-        string fileName = "data/absensi" + mataKuliah + ".txt";
+        string fileName = "data/absensi/absensi_" + mataKuliah + ".txt";
         ifstream file(fileName);
         string line;
         while (getline(file, line)) {
             vector<string> tokens = split(line, ',');
-            if (tokens[0] == minggu && tokens[1] == currentMahasiswa) {
-                return false;
-            }
-        }
-        return false;
-    }
-    bool sudahTugas() {
-        string fileName = "data/kumpul_tugas_" + mataKuliah + ".txt";
-        ifstream file(fileName);
-        string line;
-        while (getline(file, line)) {
-            vector<string> tokens = split(line, ',');
-            if (tokens[0] == minggu && tokens[1] == currentMahasiswa) {
+            if (tokens[0] == minggu && tokens[1] == mahasiswa) {
                 return true;
             }
         }
         return false;
     }
+    bool sudahTugas() {
+        string fileName = "data/kumpul_tugas/kumpul_tugas_" + mataKuliah + ".txt";
+        ifstream file(fileName);
+        string line;
+        while (getline(file, line)) {
+            vector<string> tokens = split(line, ',');
+            if (tokens[0] == minggu && tokens[1] == mahasiswa) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool belumadaAbsen()
+    {
+        string fileName = "data/tugas.txt";
+        ifstream file(fileName);
+        string line;
+        while (getline(file, line)) {
+            vector<string> tokens = split(line, ',');
+            if (tokens[0] == mataKuliah && tokens[1] == minggu) {
+                return false;
+            }
+        }
+        return true;
+    }
+    bool belumadaTugas()
+    {
+        string fileName = "data/tugas.txt";
+        ifstream file(fileName);
+        string line;
+        while (getline(file, line)) {
+            vector<string> tokens = split(line, ',');
+            if (tokens[0] == mataKuliah && tokens[1] == minggu) {
+                return false;
+            }
+        }
+        return true;
+    } 
     void lihatTugasDanAbsen()
     {
         if (minggu.empty())
@@ -115,16 +143,19 @@ using namespace std;
             cout << "Minggu belum dipilih.\n";
             return;
         }
-
-        ifstream file("data/materi_" + mataKuliah + ".txt");
+        string sourcePath = "data/materi/materi_" + mataKuliah + "_" + minggu + ".txt";
+    if (!filesystem::exists(sourcePath)) {
+        cout << "Belum Ada Materi.\n";
+        return;
+    }
+        ifstream file("data/materi/materi_" + mataKuliah + "_" + minggu + ".txt");
         string line;
         cout << "Materi untuk mata kuliah " << mataKuliah << ":\n";
         while (getline(file, line)) {
-            vector<string> tokens = split(line, ',');
-            if(tokens[0] == minggu)
-            cout << line << endl;
+        cout << line << endl;
         }
     }
+        
     void absen()
     {
         if (minggu.empty())
@@ -132,21 +163,25 @@ using namespace std;
             cout << "Minggu belum dipilih.\n";
             return;
         }
+        if (belumadaAbsen()){
+            cout << "Belum ada Absen minggu ini.\n";
+            return;
+        }
         if (sudahAbsen()) {
         cout << "Anda sudah absen minggu ini.\n";
         return;
     }
         string currentDate = getCurrentDate();
-            if (isAfterDeadlineabsen(currentDate)) {
+            if (deadlineAbsen(currentDate)) {
                 cout << "Tidak bisa absen setelah deadline.\n";
                 return;
             }
         string status;
     cout << "Pilih status (hadir, sakit, izin, tanpa keterangan): ";
     cin >> status;
-        string fileName = "data/absensi" + mataKuliah + ".txt";
+        string fileName = "data/absensi/absensi_" + mataKuliah + ".txt";
         ofstream file(fileName, ios::app);
-        file << minggu << "," << currentMahasiswa << "," << status  << "\n";
+        file << minggu << "," << mahasiswa << "," << status  << "\n";
         cout << "Absen berhasil.\n";
     }
 
@@ -158,24 +193,28 @@ using namespace std;
             cout << "Minggu belum dipilih.\n";
             return;
         }
+        if (belumadaTugas()) {
+        cout << "Belum ada Tugas minggu ini.\n";
+        return;
+    }
         if (sudahTugas()) {
         cout << "Anda sudah Mengumpulkan Tugas minggu ini.\n";
         return;
     }
          string currentDate = getCurrentDate();
-          if (isAfterDeadlinetugas(currentDate)) {
+          if (deadlineTugas(currentDate)) {
           cout << "Tidak bisa mengumpulkan tugas setelah deadline.\n";
         return;
     }
-        string filePath;
-        cout << "Path file tugas: ";
-        cin >> filePath;
+        string jawaban;
+        cout << "Jawaban: ";
+        cin >> jawaban;
         
-        string fileName = "data/kumpul_tugas_" + mataKuliah + ".txt";
+        string fileName = "data/kumpul_tugas/kumpul_tugas_" + mataKuliah + ".txt";
         
         ofstream file(fileName, ios::app);
-        file << minggu << "," << currentMahasiswa << "," << filePath << "\n";
-        cout << "Tugas berhasil dikumpulkan di " << fileName << ".\n";
+        file << minggu << "," << mahasiswa << "," << jawaban << "\n";
+        cout << "Tugas berhasil dikumpulkan" << ".\n";
     }
 
 #endif

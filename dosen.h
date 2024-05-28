@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <algorithm> // Untuk std::sort
+#include <algorithm> 
 #include "utils.h"
 
 
@@ -19,63 +19,28 @@ struct Dosen {
         while (getline(file, line)) {
             vector<string> tokens = split(line, ',');
             if (tokens[0] == username && tokens[1] == password) {
-                currentDosen = tokens[0];
+                dosen = tokens[0];
                 mataKuliah = tokens[2]; 
                 return true;
             }
         }
         return false;
     }
-        void sortFileByCourse(const string& filePath) {
-    // Baca data dari file ke dalam vektor
-    vector<string> lines;
-    ifstream file(filePath);
-    if (!file.is_open()) {
-        cout << "File tidak dapat dibuka." << endl;
-        return;
-    }
-    string line;
-    while (getline(file, line)) {
-        lines.push_back(line);
-    }
-    file.close();
-
-    // Urutkan vektor berdasarkan nama mata kuliah dan kemudian minggu
-    sort(lines.begin(), lines.end(), [](const string& a, const string& b) {
-        vector<string> tokensA = split(a, ',');
-        vector<string> tokensB = split(b, ',');
-        if (tokensA[0] == tokensB[0]) {
-            return stoi(tokensA[1]) < stoi(tokensB[1]); // Mengurutkan berdasarkan minggu jika nama mata kuliah sama
-        }
-        return tokensA[0] < tokensB[0]; // Mengurutkan berdasarkan nama mata kuliah (indeks 0 setelah pemisahan)
-    });
-
-    // Tulis kembali data yang telah diurutkan ke file
-    ofstream outputFile(filePath, ios::trunc); // Menggunakan ios::trunc untuk menghapus isi file sebelum menulis ulang
-    for (const string& sortedLine : lines) {
-        outputFile << sortedLine << endl;
-    }
-    outputFile.close();
-
-    cout << "Data dalam file berhasil diurutkan berdasarkan nama mata kuliah dan minggu." << endl;
-}
-
     void createMinggu() {
         string minggu;
         cout << "Minggu (misal: 1, 2, 3, ...): ";
         cin >> minggu;
-        {
+        
         ofstream file("data/minggu.txt", ios::app);
         file << mataKuliah << "," << minggu << "\n";
         cout << "Minggu berhasil dibuat.\n";
-        }
-            sortFileByCourse("data/minggu.txt");
+        
 
     }
     void createMateri() {
         string minggu = pilihMinggu();
         if (minggu.empty()) return;
-        ofstream file("data/materi_" + mataKuliah + ".txt", ios::app);
+        ofstream file("data/materi/materi_" + mataKuliah + "_" + minggu + ".txt", ios::app);
 
         string judul, isi;
         cout << "Judul materi: ";
@@ -116,7 +81,7 @@ struct Dosen {
         string tanggal;
         cout << "Tanggal (YYYY-MM-DD): ";
         cin >> tanggal;
-        file << mataKuliah << "," << minggu << "," << tanggal << "," << currentDosen << "\n";
+        file << mataKuliah << "," << minggu << "," << tanggal << "," << dosen << "\n";
         cout << "Absen berhasil dibuat.\n";
     }
 
@@ -153,7 +118,7 @@ struct Dosen {
         if (minggu.empty()) return;
 
         cout << "Daftar Mahasiswa yang sudah absen di minggu " << minggu << ":\n";
-        ifstream absenFile("data/absensi_" + mataKuliah + ".txt");
+        ifstream absenFile("data/absensi/absensi_" + mataKuliah + ".txt");
         string line;
         while (getline(absenFile, line)) {
             vector<string> tokens = split(line, ',');
@@ -163,7 +128,7 @@ struct Dosen {
         }
 
         cout << "Daftar Mahasiswa yang sudah mengumpulkan tugas di minggu " << minggu << ":\n";
-        ifstream tugasFile("data/kumpul_tugas_" + mataKuliah + ".txt");
+        ifstream tugasFile("data/kumpul_tugas/kumpul_tugas_" + mataKuliah + ".txt");
         while (getline(tugasFile, line)) {
             vector<string> tokens = split(line, ',');
             if (tokens[0] == minggu) {
@@ -172,7 +137,7 @@ struct Dosen {
         }
     }
 
-    string currentDosen;
+    string dosen;
     string mataKuliah;
 
     string pilihMinggu() {
@@ -205,7 +170,7 @@ struct Dosen {
         string line;
         while (getline(file, line)) {
             vector<string> tokens = split(line, ',');
-            if (tokens[0] == currentDosen) {
+            if (tokens[0] == mataKuliah) {
                 mingguList.push_back(tokens[1]);
             }
         }

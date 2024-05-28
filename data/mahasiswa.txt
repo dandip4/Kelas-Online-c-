@@ -1,3 +1,6 @@
-Danadipa,123
-Alif,123
-Asep,123
+Danadipa,199
+Raihan,200
+Fikri,201
+Dika,202
+Alif,203
+

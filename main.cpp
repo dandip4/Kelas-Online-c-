@@ -18,9 +18,12 @@ int main()
     int choice;
     while (true)
     {
+        cout << "Dashboard\n";
         cout << "1. Admin\n2. Dosen\n3. Mahasiswa\n4. Exit\n";
-        cout << "Choose your role: ";
+        cout << "Pilih role: ";
         cin >> choice;
+        cout << "\n";
+
         switch (choice)
         {
         case 1:
@@ -35,7 +38,7 @@ int main()
         case 4:
             return 0;
         default:
-            cout << "Invalid choice, please try again.\n";
+            cout << "Pilihan gagal.\n";
         }
     }
     return 0;
@@ -49,19 +52,23 @@ void adminMenu()
     cin >> username;
     cout << "Password: ";
     cin >> password;
+    cout << "\n";
 
     if (!admin.authenticate(username, password))
     {
-        cout << "Login failed!\n";
+        cout << "Login gagal\n";
         return;
     }
 
     int choice;
     while (true)
     {
+        cout << "Menu Admin\n";
         cout << "1. CRUD Mahasiswa\n2. CRUD Dosen\n3. Logout\n";
-        cout << "Choose an option: ";
+        cout << "pilih opsi: ";
         cin >> choice;
+        cout << "\n";
+
         switch (choice)
         {
         case 1:
@@ -73,7 +80,7 @@ void adminMenu()
         case 3:
             return;
         default:
-            cout << "Invalid choice, please try again.\n";
+            cout << "Pilihan gagal\n";
         }
     }
 }
@@ -86,19 +93,21 @@ void dosenMenu()
     cin >> username;
     cout << "NIDN: ";
     cin >> password;
-
+    cout << "\n";
     if (!dosen.authenticate(username, password))
     {
-        cout << "Login failed!\n";
+        cout << "Login gagal!\n";
         return;
     }
 
     int choice;
     while (true)
-    {
+    {   
+        cout << "Menu Admin\n";
         cout << "1. Buat Minggu\n2. Buat Tugas\n3. Buat Absen\n4. Buat Materi\n5. Lihat Tugas\n6. Lihat Absensi\n7. Lihat Mahasiswa Absen dan Tugas\n8. Keluar\nPilihan: ";
-        cout << "Choose an option: ";
+        cout << "pilih opsi: ";
         cin >> choice;
+        cout << "\n";
         switch (choice)
         {
         case 1:
@@ -125,7 +134,7 @@ void dosenMenu()
         case 8:
             return;
         default:
-            cout << "Invalid choice, please try again.\n";
+            cout << "pilhan gagal\n";
         }
     }
 }
@@ -138,7 +147,7 @@ void mahasiswaMenu()
     cin >> username;
     cout << "Password: ";
     cin >> password;
-
+    cout << "\n";
     if (!mahasiswa.authenticate(username, password))
     {
         cout << "Login failed!\n";
@@ -149,10 +158,12 @@ void mahasiswaMenu()
 
     int choice;
     while (true)
-    {
-        cout << "1. Lihat Tugas dan Absen\n2. Lihat Materi\n3. Kumpul Tugas\n4. Absen\n5. Kumpul Tugas\n";
+    {   cout << "\n";
+        cout << mataKuliah << " Minggu ke: " << minggu << "\n";
+        cout << "1. Lihat Tugas dan Absen\n2. Lihat Materi\n3. Kumpul Tugas\n4. Absen\n5. Pilih Minggu\n6. Pilih Matakuliah\n7. Logout\n";
         cout << "Choose an option: ";
         cin >> choice;
+        cout << "\n";
         switch (choice)
         {
         case 1:
@@ -164,13 +175,20 @@ void mahasiswaMenu()
         case 3:
             mahasiswa.kumpulTugas();
             break;
-            case 4:
+        case 4:
             mahasiswa.absen();
             break;
         case 5:
+            mahasiswa.pilihMinggu();
+            break;
+        case 6:
+            mahasiswa.pilihMataKuliah();
+            break;
+        case 7:
             return;
         default:
-            cout << "Invalid choice, please try again.\n";
+            cout << "Invalid choice, please try again\n";
         }
     }
 }
+// D:\FILE ISO

@@ -1,5 +1,0 @@
-Danadipa,1,jfksdajf
-Danadipa,2,jfdksjfdf
-1,Danadipa,dandip
-1,Danadipa,gdfgdfg
-1,Danadipa,jf

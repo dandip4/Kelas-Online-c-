@@ -1,2 +1,2 @@
-1,Bisnis,2024-05-25,Fikri
-Bisnis,1,2024-06-01,Fikri
+Algoritma,1,2025-02-02,Dinar
+Algoritma,2,2023-02-02,Dinar
