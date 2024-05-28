@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <utility> 
+#include <utility>
 #include "utils.h"
 #include "akademik.h"
 
@@ -13,7 +13,7 @@ using namespace std;
 
 struct Mahasiswa
 {
-    bool authenticate(const string &username, const string &password)
+    bool auth(const string &username, const string &password)
     {
         ifstream file("data/mahasiswa.txt");
         string line;

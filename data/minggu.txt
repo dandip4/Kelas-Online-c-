@@ -1,4 +1,9 @@
 Algoritma,1
 Algoritma,2
 Algoritma,3
+Algoritma,4
+Komputer,1
+Komputer,2
 Matematika,1
+Matematika,2
+Algoritma,6

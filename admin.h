@@ -13,7 +13,7 @@ using namespace std;
 
 struct Admin
 {
-    bool authenticate(const string &username, const string &password)
+    bool auth(const string &username, const string &password)
     {
         ifstream file("data/admin.txt");
         string line;
@@ -32,7 +32,8 @@ struct Admin
     {
         int choice;
         while (true)
-        {        cout << "\n";
+        {
+            cout << "\n";
 
             cout << "CRUD Mahasiswa\n";
             cout << "1. Tambah Mahasiswa\n2. Lihat Mahasiswa\n3. Update Mahasiswa\n4. Hapus Mahasiswa\n5. Kembali\n";

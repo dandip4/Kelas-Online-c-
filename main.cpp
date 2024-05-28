@@ -54,7 +54,7 @@ void adminMenu()
     cin >> password;
     cout << "\n";
 
-    if (!admin.authenticate(username, password))
+    if (!admin.auth(username, password))
     {
         cout << "Login gagal\n";
         return;
@@ -94,7 +94,7 @@ void dosenMenu()
     cout << "NIDN: ";
     cin >> password;
     cout << "\n";
-    if (!dosen.authenticate(username, password))
+    if (!dosen.auth(username, password))
     {
         cout << "Login gagal!\n";
         return;
@@ -102,7 +102,7 @@ void dosenMenu()
 
     int choice;
     while (true)
-    {   
+    {
         cout << "Menu Admin\n";
         cout << "1. Buat Minggu\n2. Buat Tugas\n3. Buat Absen\n4. Buat Materi\n5. Lihat Tugas\n6. Lihat Absensi\n7. Lihat Mahasiswa Absen dan Tugas\n8. Keluar\nPilihan: ";
         cout << "pilih opsi: ";
@@ -148,7 +148,7 @@ void mahasiswaMenu()
     cout << "Password: ";
     cin >> password;
     cout << "\n";
-    if (!mahasiswa.authenticate(username, password))
+    if (!mahasiswa.auth(username, password))
     {
         cout << "Login failed!\n";
         return;
@@ -158,7 +158,8 @@ void mahasiswaMenu()
 
     int choice;
     while (true)
-    {   cout << "\n";
+    {
+        cout << "\n";
         cout << mataKuliah << " Minggu ke: " << minggu << "\n";
         cout << "1. Lihat Tugas dan Absen\n2. Lihat Materi\n3. Kumpul Tugas\n4. Absen\n5. Pilih Minggu\n6. Pilih Matakuliah\n7. Logout\n";
         cout << "Choose an option: ";

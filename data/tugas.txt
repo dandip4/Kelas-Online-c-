@@ -1,2 +1,6 @@
 Algoritma,1,sorting,buatkan sorting 3,2025-03-21
-Algoritma,2,sorting,buatkan sorting 3,2025-03-21
+Algoritma,2,php,buatkan php 3,2025-03-21
+Komputer,1,jfjfjfj,jkdsjfkaj,2024-02-02
+Komputer,2,jjfjfj,fkjsaj ksjdfkl jkas lks,2020-02-02
+Matematika,2,aljabar,buatkan aljabar 3,2025-03-21
+Matematika,2,diskrit,buatkan diskrit 3,2025-03-21
